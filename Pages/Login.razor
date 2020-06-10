@@ -1,0 +1,40 @@
+﻿<div class="card">
+    <div class="card-header">
+        <h3>Login</h3>
+    </div>
+    <div class="card-body">
+        <table>
+            <tbody>
+                <tr><td>Username:</td><td><input class="form-text" @bind="Username" type="text" /></td></tr>
+                <tr><td>Password:</td><td><input class="form-text" @bind="Password" type="password" /></td></tr>
+            </tbody>
+        </table>
+        
+        
+    </div>
+    <div class="card-footer">
+        <button class="btn btn-success" @onclick="LoginPress">Login</button>
+    </div>
+</div>
+
+
+@code {
+    private string Username { get; set; }
+    private string Password { get; set; }
+
+    [Parameter]
+    public bool IsUserLoggedIn { get; set; }
+
+    [Parameter]
+    public EventCallback<bool> IsUserLoggedInChanged { get; set; }
+    async Task UpdateUserLogin()
+    {
+        await IsUserLoggedInChanged.InvokeAsync(IsUserLoggedIn);
+    }
+
+    private void LoginPress()
+    {
+        IsUserLoggedIn = true;
+        IsUserLoggedInChanged.InvokeAsync(IsUserLoggedIn);
+    }
+}

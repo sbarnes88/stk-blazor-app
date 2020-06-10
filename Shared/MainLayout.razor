@@ -1,0 +1,34 @@
+﻿@inherits LayoutComponentBase
+
+@if (IsUserLoggedIn)
+{
+
+<div class="sidebar">
+    <NavMenu />
+</div>
+
+<div class="main">
+    <div class="top-row px-4">
+        <a href="http://blazor.net" target="_blank" class="ml-md-auto">About</a>
+    </div>
+
+    <div class="content px-4">
+        @Body
+    </div>
+</div>
+}
+else
+{
+    <div class="main">
+        <div class="content px-4">
+            <BlazorWeb.Pages.Login @bind-IsUserLoggedIn="@IsUserLoggedIn"></BlazorWeb.Pages.Login>
+        </div>
+    </div>
+    
+}
+
+@code {
+    private string Username { get; set; }
+    private string Password { get; set; }
+    private bool IsUserLoggedIn { get; set; }
+}
